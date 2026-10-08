@@ -158,22 +158,22 @@ const DEN=[1000,500,200,100,50,20,10,5,1];
 const COL={1000:'#bfe3f5',500:'#ffe08a',200:'#c9efc2',100:'#d9c8f5',50:'#ffc2c2',20:'#ffd9a8',10:'#ffe9a0',5:'#e5d3b8',1:'#e5e5e5'};
 const AVC=['#ff6b4a','#12a36b','#4c7cf0','#e0569c','#f0a020','#8a5cf0'];
 const peso=n=>'₱'+Number(n).toLocaleString('en-PH',{maximumFractionDigits:2});
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const expr=s=>String(s||'').split('+').reduce((a,p)=>a+(parseFloat(p)||0),0);
 // languages: en = English, tg = Taglish, tl = Tagalog
 const L={
-en:{t0:'Who needs suklian?',s0:"Enter each person’s contribution and the cash they handed to the payer.",pay:'💳 Paid',notPay:'Paid?',order:'Contribution',gave:'HAND GIVEN TO PAYER',add:'+ Add a member',n0:'Next: Contribution & cash',
-t1:'Contribution & your cash',s1:'How much did the payer give, and what cash do they hold?',paid:'AMOUNT GIVEN',shared:'SHARED / EXTRA AMOUNT (split equally, optional)',total:'Total contribution',cchg:'Collector change',lack:x=>`Payer is short by ${x} for the group collection.`,wt:"Payer's wallet",ws:'Include the collector change and cash from members. The plan uses this.',wtot:'Wallet total: ',n1:'See the breakdown',n2:'Start over ↺',back:'Back',
-chg:'Change',short:'Short',ok:'Settled ✓',give:'You give',ret:'They give back',net:'Their change',exact:x=>`Just give ${x} 🎉 exact, no change needed.`,col:x=>`Collect ${x} from them.`,exactNote:'Exact amount, no change.',nocash:x=>`Not enough cash. Send ${x} by GCash or add cash to the wallet.`,alt:'🔀 Try another setup',done:'Done',all:'All settled! 🎉',left:x=>`Left in wallet: ${x}. Add whatever your members hand back.`,none:'nothing',cb:'Collector change'},
-tg:{t0:'Sino ang kailangan suklian?',s0:'Ilagay ang contribution ng bawat isa at ang cash na inabot nila sa nagbayad.',pay:'💳 Nagbayad',notPay:'Siya nagbayad?',order:'Contribution',gave:'INABOT SA PAYER',add:'+ Dagdag na member',n0:'Next: Contribution & cash',
-t1:'Contribution at cash mo',s1:'Magkano ang ibinigay ng payer, at anong cash ang hawak niya?',paid:'IBINIGAY NA HALAGA',shared:'SHARED / EXTRA AMOUNT (hati-hati, optional)',total:'Kabuuang contribution',cchg:'Sukli ng collector',lack:x=>`Kulang ng ${x} ang contribution para sa ambagan.`,wt:'Wallet ng payer',ws:'Isama ang sukli ng collector at cash mula sa mga member. Dito huhugot ang plano.',wtot:'Total sa wallet: ',n1:'Tingnan ang breakdown',n2:'Ulitin ↺',back:'Back',
-chg:'Sukli',short:'Kulang',ok:'Settled ✓',give:'Ibibigay mo',ret:'Ibabalik niya',net:'Sukli niya',exact:x=>`Ibigay lang ang ${x} 🎉 exact, walang sukli.`,col:x=>`Kunin sa kanya ang ${x}.`,exactNote:'Eksakto, walang sukli.',nocash:x=>`Kulang ang cash mo. I-GCash na lang ang ${x} o dagdagan ang wallet.`,alt:'🔀 Ibang setup',done:'Tapos na',all:'Settled lahat! 🎉',left:x=>`Matitira sa wallet: ${x}. Idagdag ang ibinalik ng mga member.`,none:'wala',cb:'Sukli ng collector'},
-tl:{t0:'Sino ang kailangan suklian?',s0:'Ilagay ang contribution ng bawat isa at ang perang iniabot nila sa nagbayad.',pay:'💳 Nagbayad',notPay:'Siya ba ang nagbayad?',order:'Contribution',gave:'INIABOT SA NAGBAYAD',add:'+ Magdagdag ng member',n0:'Susunod: Contribution & pera',
-t1:'Contribution at pera',s1:'Magkano ang ibinigay ng nagbayad, at anong pera ang hawak niya?',paid:'IBINIGAY NA HALAGA',shared:'SHARED / EXTRA AMOUNT (hati-hati, opsyonal)',total:'Kabuuang contribution',cchg:'Sukli ng collector',lack:x=>`Kulang ng ${x} ang contribution para sa ambagan.`,wt:'Pitaka ng nagbayad',ws:'Isama ang sukli ng collector at perang galing sa mga member. Dito huhugot ang plano.',wtot:'Kabuuan sa pitaka: ',n1:'Tingnan ang breakdown',n2:'Ulitin ↺',back:'Bumalik',
-chg:'Sukli',short:'Kulang',ok:'Bayad na ✓',give:'Ibibigay mo',ret:'Ibabalik niya',net:'Sukli niya',exact:x=>`Ibigay lamang ang ${x} 🎉 eksakto, walang sukli.`,col:x=>`Kunin sa kanya ang ${x}.`,exactNote:'Eksakto, walang sukli.',nocash:x=>`Kulang ang pera mo. I-GCash ang ${x} o dagdagan ang pitaka.`,alt:'🔀 Ibang setup',done:'Tapos na',all:'Bayad na lahat! 🎉',left:x=>`Matitira sa pitaka: ${x}. Idagdag ang ibinalik ng mga member.`,none:'wala',cb:'Sukli ng collector'}};
-const S={step:0,payer:0,paid:'',shared:'',lang:'tg',theme:matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light',
+en:{t0:'Split the bill',s0:'Enter the total bill first, then divide it by how many people are in the group.',pay:'💳 Paid',notPay:'Paid?',order:'Contribution',gave:'HAND GIVEN TO PAYER',add:'+ Add a member',n0:'Next: Bill & cash',
+t1:'Bill & your cash',s1:'How much did the payer give, and what cash do they hold?',paid:'AMOUNT GIVEN',shared:'SHARED / EXTRA AMOUNT (split equally, optional)',total:'Total contribution',cchg:'Collector change',lack:x=>`Payer is short by ${x} for the group collection.`,wt:"Payer's wallet",ws:'Enter the actual bills and coins available, including the cashier change. The plan uses these denominations.',wtot:'Wallet total: ',n1:'See the breakdown',n2:'Start over ↺',back:'Back',
+chg:'Change',short:'Short',ok:'Settled ✓',give:'You give',ret:'They give back',net:'Their change',exact:x=>`Just give ${x} 🎉 exact, no change needed.`,col:x=>`Collect ${x} from them.`,exactNote:'Exact amount, no change.',nocash:x=>`Available bills cannot cover ${x}. Enter the actual bills and coins, or add cash from members.`,alt:'🔀 Try another setup',done:'Done',wait:'Waiting for the previous settlement.',all:'All settled! 🎉',left:x=>`Wallet after settlements: ${x}.`,none:'nothing',cb:'Collector change'},
+tg:{t0:'Hatiin ang bill',s0:'Ilagay muna ang kabuuang bill, pagkatapos hatiin ito base sa bilang ng tao sa grupo.',pay:'💳 Nagbayad',notPay:'Siya nagbayad?',order:'Contribution',gave:'INABOT SA PAYER',add:'+ Dagdag na member',n0:'Next: Bill & cash',
+t1:'Bill at cash mo',s1:'Magkano ang ibinigay ng payer, at anong cash ang hawak niya?',paid:'IBINIGAY NA HALAGA',shared:'SHARED / EXTRA AMOUNT (hati-hati, optional)',total:'Kabuuang contribution',cchg:'Sukli ng collector',lack:x=>`Kulang ng ${x} ang contribution para sa ambagan.`,wt:'Wallet ng payer',ws:'Ilagay ang aktwal na bills at coins, kasama ang sukli ng cashier. Gagamitin ito sa plano.',wtot:'Total sa wallet: ',n1:'Tingnan ang breakdown',n2:'Ulitin ↺',back:'Back',
+chg:'Sukli',short:'Kulang',ok:'Settled ✓',give:'Ibibigay mo',ret:'Ibabalik niya',net:'Sukli niya',exact:x=>`Ibigay lang ang ${x} 🎉 exact, walang sukli.`,col:x=>`Kunin sa kanya ang ${x}.`,exactNote:'Eksakto, walang sukli.',nocash:x=>`Hindi mabuo ang ${x} gamit ang bills na inilagay. Ilagay ang aktwal na bills at coins o idagdag ang cash mula sa mga member.`,alt:'🔀 Ibang setup',done:'Tapos na',wait:'Hintayin munang matapos ang naunang sukli.',all:'Settled lahat! 🎉',left:x=>`Natira sa wallet: ${x}.`,none:'wala',cb:'Sukli ng collector'},
+tl:{t0:'Hatiin ang bill',s0:'Ilagay muna ang kabuuang bill, pagkatapos hatiin ito base sa bilang ng tao sa grupo.',pay:'💳 Nagbayad',notPay:'Siya ba ang nagbayad?',order:'Contribution',gave:'INIABOT SA NAGBAYAD',add:'+ Magdagdag ng member',n0:'Susunod: Bill & pera',
+t1:'Bill at pera',s1:'Magkano ang ibinigay ng nagbayad, at anong pera ang hawak niya?',paid:'IBINIGAY NA HALAGA',shared:'SHARED / EXTRA AMOUNT (hati-hati, opsyonal)',total:'Kabuuang contribution',cchg:'Sukli ng collector',lack:x=>`Kulang ng ${x} ang contribution para sa ambagan.`,wt:'Pitaka ng nagbayad',ws:'Ilagay ang aktwal na bills at coins, kasama ang sukli ng cashier. Gagamitin ito sa plano.',wtot:'Kabuuan sa pitaka: ',n1:'Tingnan ang breakdown',n2:'Ulitin ↺',back:'Bumalik',
+chg:'Sukli',short:'Kulang',ok:'Bayad na ✓',give:'Ibibigay mo',ret:'Ibabalik niya',net:'Sukli niya',exact:x=>`Ibigay lamang ang ${x} 🎉 eksakto, walang sukli.`,col:x=>`Kunin sa kanya ang ${x}.`,exactNote:'Eksakto, walang sukli.',nocash:x=>`Hindi mabuo ang ${x} gamit ang perang inilagay. Ilagay ang aktwal na bills at coins o idagdag ang cash mula sa mga member.`,alt:'🔀 Ibang setup',done:'Tapos na',wait:'Hintaying matapos ang naunang bayaran.',all:'Bayad na lahat! 🎉',left:x=>`Natira sa pitaka: ${x}.`,none:'wala',cb:'Sukli ng collector'}};
+const S={step:0,payer:0,paid:'',shared:'',billTotal:'',lang:'tg',theme:matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light',
  people:[{name:'',order:'',gave:''},{name:'',order:'',gave:''},{name:'',order:'',gave:''}],
- wallet:{1000:0,500:0,200:0,100:1,50:1,20:0,10:0,5:0,1:0},done:{},alt:{}};
+wallet:{1000:0,500:0,200:0,100:0,50:0,20:0,10:0,5:0,1:0},done:{},donePlans:{},alt:{}};
 
 function generateScenario(){
   S.step=0; S.payer=0; S.paid='500'; S.shared='';
@@ -183,10 +183,18 @@ function generateScenario(){
 }
 const $=id=>document.getElementById(id);
 const t=k=>L[S.lang][k];
+const billShare=()=>{const bill=parseFloat(S.billTotal)||0;return bill?Math.ceil(bill/Math.max(S.people.length,1)):0};
 
 function figures(){
-  const n=S.people.length,sh=(parseFloat(S.shared)||0)/n;
-  const share=S.people.map(p=>expr(p.order)+sh),total=share.reduce((a,b)=>a+b,0),paid=parseFloat(S.paid)||0;
+  const n=Math.max(S.people.length,1),sh=(parseFloat(S.shared)||0)/n;
+  const totalFromBill = parseFloat(S.billTotal) || 0;
+  const share=S.people.map((p,i)=>{
+    const custom = parseFloat(p.order) || 0;
+    if (totalFromBill && !p.order) return Math.ceil(totalFromBill / n);
+    return custom + sh;
+  });
+  const total = totalFromBill || share.reduce((a,b)=>a+b,0);
+  const paid=parseFloat(S.paid)||0;
   return{total,paid,chg:paid-total,D:S.people.map((p,i)=>i===S.payer?0:Math.round((parseFloat(p.gave)||0)-share[i]))};
 }
 // smallest set of pieces that sums to >= minG (exact first, then least overpay)
@@ -204,11 +212,19 @@ const bills=u=>'<div class="bills">'+Object.keys(u).sort((a,b)=>b-a).map(d=>`<sp
 const chipRow=(vals,cur,fn)=>'<div class="chips">'+vals.map(v=>`<button class="ch ${String(cur)===String(v)?'on':''}" onclick="${fn}">${peso(v)}</button>`.replace('$V',v)).join('')+'</div>';
 
 function step0(){
-  return `<h2>${t('t0')}</h2><p class="sub">${t('s0')}</p>`+S.people.map((p,i)=>`<div class="card"><div class="pr"><div class="av" style="background:${AVC[i%6]}">${esc((p.name||'?')[0].toUpperCase())}</div>
+  const perPerson = billShare();
+  return `<h2>${t('t0')}</h2><p class="sub">${t('s0')}</p>
+  <div class="card">
+    <div class="fld" style="margin-top:0"><label>Total bill</label>
+      <div class="money"><b>₱</b><input inputmode="decimal" value="${esc(S.billTotal)}" placeholder="0" oninput="updateBillTotal(this.value)"></div>
+      <div class="note" id="billSplitPreview" style="margin-top:8px;${perPerson ? '' : 'display:none'}">Split per person: <b>${peso(perPerson)}</b></div>
+    </div>
+  </div>
+  `+S.people.map((p,i)=>`<div class="card"><div class="pr"><div class="av" style="background:${AVC[i%6]}">${esc((p.name||'?')[0].toUpperCase())}</div>
     <input class="name" value="${esc(p.name)}" oninput="S.people[${i}].name=this.value">
     <button class="ch tog ${i===S.payer?'on':''}" onclick="S.payer=${i};S.alt={};draw()">${i===S.payer?t('pay'):t('notPay')}</button>
     ${S.people.length>2?`<button class="rm" onclick="rmP(${i})">✕</button>`:''}</div>
-    <div class="fld"><label>${t('order')}</label><div class="money"><b>₱</b><input inputmode="decimal" value="${esc(p.order)}" placeholder="0" oninput="S.people[${i}].order=this.value"></div></div>
+    <div class="fld"><label>${t('order')}</label><div class="money"><b>₱</b><input id="order${i}" inputmode="decimal" value="${esc(p.order || (perPerson ? perPerson : ''))}" placeholder="0" oninput="S.people[${i}].order=this.value"></div></div>
     ${i===S.payer?'':`<div class="fld"><label>${t('gave')}</label><div class="money"><b>₱</b><input inputmode="decimal" value="${esc(p.gave)}" placeholder="0" oninput="S.people[${i}].gave=this.value"></div>${chipRow([50,100,200,500,1000],p.gave,`setG(${i},$V)`)}</div>`}</div>`).join('')+
   `<button class="add" onclick="S.people.push({name:'',order:'',gave:''});draw()">${t('add')}</button><button class="add" style="margin-top:8px" onclick="generateScenario()">Generate a scenario</button>`;
 }
@@ -221,23 +237,54 @@ function step1(){
   <div class="wal">${DEN.map(d=>`<div class="den" style="background:${COL[d]}"><b>${peso(d)}</b><div class="ct"><button onclick="wal(${d},-1)">−</button><span id="w${d}">${S.wallet[d]}</span><button onclick="wal(${d},1)">+</button></div></div>`).join('')}</div>
   <p class="note" id="wt" style="margin-top:10px"></p>`;
 }
+function cashBreakdown(amount){
+  const result={};let remaining=Math.max(0,Math.round(amount));
+  DEN.forEach(d=>{const count=Math.floor(remaining/d);if(count)result[d]=count;remaining%=d});
+  return result;
+}
+function settle(i,key){
+  const active=S.activePlan;
+  if(!active||active.i!==i||active.key!==key)return;
+  const received=active.d>0?cashBreakdown(active.r.G-active.d):cashBreakdown(-active.d);
+  if(active.d>0)DEN.forEach(d=>S.wallet[d]=Math.max(0,S.wallet[d]-(active.r.used[d]||0)));
+  DEN.forEach(d=>S.wallet[d]=(S.wallet[d]||0)+(received[d]||0));
+  S.done[key]=true;
+  S.donePlans[key]={d:active.d,r:active.r,received};
+  S.activePlan=null;S.alt={};draw();
+}
 function step2(){
-  const c=figures(),left={...S.wallet},plan={},cnt={};
-  S.people.map((p,i)=>[c.D[i],i]).filter(x=>x[0]>0).sort((a,b)=>b[0]-a[0]).forEach(([d,i])=>{
-    const o=options(d,left);cnt[i]=o.length;if(!o.length)return;
-    const r=o[(S.alt[i]||0)%o.length];plan[i]=r;DEN.forEach(k=>left[k]-=(r.used[k]||0))});
-  let cards='',open=0;
+  const c=figures();let cards='',open=0,activeFound=false;
+  S.activePlan=null;
   S.people.forEach((p,i)=>{
-    if(i===S.payer)return;const d=c.D[i],key=i+'|'+d;let pill,body,cls='card res';
-    if(d>0){const r=plan[i];pill=`${t('chg')} ${peso(d)}`;
-      if(!r)body=`<div class="warn">${t('nocash')(peso(d))}</div>`;
-      else if(r.G===d)body=`<div class="act">${t('exact')(`<b>${peso(d)}</b>`)}</div>${bills(r.used)}`+(cnt[i]>1?`<button class="alt" onclick="S.alt[${i}]=(S.alt[${i}]||0)+1;draw()">${t('alt')}</button>`:'');
-      else body=`<div class="flow"><div><small>${t('give')}</small><b>${peso(r.G)}</b></div><i>→</i><div><small>${t('ret')}</small><b>${peso(r.G-d)}</b></div><i>=</i><div class="net"><small>${t('net')}</small><b>${peso(d)}</b></div></div>${bills(r.used)}`+(cnt[i]>1?`<button class="alt" onclick="S.alt[${i}]=(S.alt[${i}]||0)+1;draw()">${t('alt')}</button>`:'')}
-    else if(d<0){cls+=' owe';pill=`${t('short')} ${peso(-d)}`;body=`<div class="act">${t('col')(`<b>${peso(-d)}</b>`)}</div>`}
-    else{pill=t('ok');body=`<div class="note" style="margin-top:8px">${t('exactNote')}</div>`}
-    if(d!==0&&!S.done[key])open++;if(S.done[key])cls+=' dn';
-    cards+=`<div class="${cls}"><div class="top"><div class="av" style="background:${AVC[i%6]};width:36px;height:36px;font-size:15px">${esc((p.name||'?')[0].toUpperCase())}</div><b>${esc(p.name||'Friend')}</b><span class="pill">${pill}</span></div>${body}${d!==0?`<label class="chk"><input type="checkbox" ${S.done[key]?'checked':''} onchange="S.done['${key}']=this.checked;draw()"> ${t('done')}</label>`:''}</div>`});
-  const rest=DEN.filter(k=>left[k]>0).map(k=>`${left[k]}×${peso(k)}`).join(', ')||t('none');
+    if(i===S.payer)return;
+    const d=c.D[i],key=i+'|'+d;let pill,body,cls='card res';
+    if(d===0){pill=t('ok');body=`<div class="note" style="margin-top:8px">${t('exactNote')}</div>`}
+    else if(S.done[key]){
+      const saved=S.donePlans[key];pill=t('ok');cls+=' dn';
+      body=saved?.r?`${saved.d>0?(saved.r.G===saved.d?t('exact')(`<b>${peso(saved.d)}</b>`):`${t('give')} ${peso(saved.r.G)}; ${t('ret')} ${peso(saved.r.G-saved.d)}.`):t('col')(`<b>${peso(-saved.d)}</b>`)}${bills(saved.r.used)}${Object.values(saved.received).some(Boolean)?`<div class="note">${t('ret')}: ${bills(saved.received)}</div>`:''}`:`<div class="note">${t('ok')}</div>`;
+    }else{
+      open++;
+      if(activeFound){pill=d>0?`${t('chg')} ${peso(d)}`:`${t('short')} ${peso(-d)}`;body=`<div class="note">${t('wait')}</div>`}
+      else{
+        activeFound=true;S.activePlan={i,key,d,r:null};
+        if(d>0){
+          pill=`${t('chg')} ${peso(d)}`;
+          const choices=options(d,S.wallet),r=choices[(S.alt[i]||0)%choices.length];
+          if(r){S.activePlan.r=r;
+            if(r.G===d)body=`<div class="act">${t('exact')(`<b>${peso(d)}</b>`)}</div>${bills(r.used)}`;
+            else body=`<div class="flow"><div><small>${t('give')}</small><b>${peso(r.G)}</b></div><i>→</i><div><small>${t('ret')}</small><b>${peso(r.G-d)}</b></div><i>=</i><div class="net"><small>${t('net')}</small><b>${peso(d)}</b></div></div>${bills(r.used)}<div class="note">${t('ret')}: ${bills(cashBreakdown(r.G-d))}</div>`;
+            if(choices.length>1)body+=`<button class="alt" onclick="S.alt[${i}]=(S.alt[${i}]||0)+1;draw()">${t('alt')}</button>`;
+            body+=`<button class="btn p" onclick="settle(${i},'${key}')">${t('done')}</button>`;
+          }else body=`<div class="warn">${t('nocash')(peso(d))}</div>`;
+        }else{
+          cls+=' owe';pill=`${t('short')} ${peso(-d)}`;
+          body=`<div class="act">${t('col')(`<b>${peso(-d)}</b>`)}</div><div class="note">${t('ret')}: ${bills(cashBreakdown(-d))}</div><button class="btn p" onclick="settle(${i},'${key}')">${t('done')}</button>`;
+        }
+      }
+    }
+    cards+=`<div class="${cls}"><div class="top"><div class="av" style="background:${AVC[i%6]};width:36px;height:36px;font-size:15px">${esc((p.name||'?')[0].toUpperCase())}</div><b>${esc(p.name||'Friend')}</b><span class="pill">${pill}</span></div>${body}</div>`;
+  });
+  const rest=DEN.filter(k=>S.wallet[k]>0).map(k=>`${S.wallet[k]}×${peso(k)}`).join(', ')||t('none');
   return `<div class="hero"><small>${t('total')} ${peso(c.total)}</small><b>${t('cb')} ${peso(c.chg)}</b></div>${c.chg<0?`<div class="warn" style="margin:0 0 12px">${t('lack')(peso(-c.chg))}</div>`:''}`+cards+(open===0?`<div class="party">${t('all')}</div>`:'')+`<p class="note">${t('left')(rest)}</p>`;
 }
 function buildSummary(){
@@ -248,37 +295,33 @@ function buildSummary(){
   const paid = parseFloat(S.paid) || 0;
   const change = paid - totalBill;
   const lines=[
-    `Total Bill: ${peso(totalBill)}`,
-    `Main Payer: ${payerDisplay} (Payer)`,
-    `Bill Paid to Cashier: ${peso(paid)} (Change Received: ${peso(change)})`,
+    `Total Amount: ${peso(totalBill)}`,
+    `Paid By: ${payerDisplay}`,
+    `Amount Paid: ${peso(paid)} (Change Received: ${peso(change)})`,
     '',
-    'FRIEND BREAKDOWN & SWAPS:'
+    'MEMBER BREAKDOWN:'
   ];
 
   S.people.forEach((p,i)=>{
     if(i===S.payer) return;
     const name = p.name || `Member ${i+1}`;
-    const share = expr(p.order) + ((parseFloat(S.shared)||0) / S.people.length);
+      const share = (S.billTotal && !p.order) ? billShare() : (expr(p.order) + ((parseFloat(S.shared)||0) / S.people.length));
     const handed = parseFloat(p.gave) || 0;
     const diff = c.D[i];
-    const target = S.people[(i + 1) % S.people.length]?.name || payerDisplay;
-    const giveAmount = Math.max(10, Math.min(Math.round(handed / 2), Math.max(10, Math.round(Math.abs(diff) + 20))));
     const refundAmount = Math.max(0, Math.round(Math.abs(diff)));
-    lines.push(`• ${name}: Meal ${peso(share)} | Handed ${peso(handed)}`);
+    lines.push(`• ${name}: Share ${peso(share)} | Contributed ${peso(handed)}`);
     if(diff > 0){
-      lines.push(`  ↳ Gave ${peso(giveAmount)} to ${target} → ${name} returned ${peso(refundAmount)}`);
-      lines.push('  ✓ FULLY SETTLED');
+      lines.push(`  ↳ Gets back ${peso(refundAmount)} from ${payerDisplay}`);
     }else if(diff < 0){
-      lines.push(`  ↳ Gave ${peso(Math.abs(diff))} to ${payerDisplay} → ${name} still owes ${peso(Math.abs(diff))}`);
-      lines.push('  ⚠ NEEDS PAYMENT');
+      lines.push(`  ↳ Owes ${peso(refundAmount)} to ${payerDisplay}`);
     }else{
-      lines.push('  ✓ FULLY SETTLED');
+      lines.push('  ↳ Settled');
     }
   });
 
   const netOut = Math.max(0, paid - totalBill);
   lines.push('');
-  lines.push(`${payerDisplay} (Payer)'s Net Out-of-Pocket: ${peso(netOut)}`);
+  lines.push(`${payerDisplay}'s net payment after change: ${peso(netOut)}`);
   return lines.join('\n');
 }
 function makeSharePayload(){
@@ -286,6 +329,7 @@ function makeSharePayload(){
     payer:S.payer,
     paid:S.paid,
     shared:S.shared,
+    billTotal:S.billTotal,
     lang:S.lang,
     theme:S.theme,
     people:S.people.map(p=>({name:p.name,order:p.order,gave:p.gave})),
@@ -308,6 +352,7 @@ function loadSharePayload(){
       S.payer = Number(data.payer || 0);
       S.paid = String(data.paid || '');
       S.shared = String(data.shared || '');
+      S.billTotal = String(data.billTotal || '');
       S.lang = data.lang || S.lang;
       S.theme = data.theme || S.theme;
       S.people = data.people.map(p=>({name:p.name||'',order:String(p.order||''),gave:String(p.gave||'')}));
@@ -370,6 +415,17 @@ function copyShareLink(){
 function upd(){const c=figures();if($('tb')){$('tb').textContent=peso(c.total);$('cg').textContent=peso(c.chg);$('wn').innerHTML=c.chg<0?`<div class="warn">${t('lack')(peso(-c.chg))}</div>`:'';
   $('wt').textContent=t('wtot')+peso(DEN.reduce((a,d)=>a+d*S.wallet[d],0))}}
 function setG(i,v){S.people[i].gave=String(v);draw()}
+function updateBillTotal(value){
+  S.billTotal=value;
+  const perPerson=billShare();
+  const preview=$('billSplitPreview');
+  preview.style.display=perPerson?'':'none';
+  preview.innerHTML=perPerson?`Split per person: <b>${peso(perPerson)}</b>`:'';
+  S.people.forEach((person,i)=>{
+    const contribution=$('order'+i);
+    if(contribution&&!person.order)contribution.value=perPerson?String(perPerson):'';
+  });
+}
 function setPaid(v){S.paid=String(v);draw()}
 function wal(d,v){S.wallet[d]=Math.max(0,Math.min(50,S.wallet[d]+v));$('w'+d).textContent=S.wallet[d];S.alt={};upd()}
 function rmP(i){S.people.splice(i,1);if(S.payer>=S.people.length)S.payer=0;else if(i<S.payer)S.payer--;S.done={};S.alt={};draw()}

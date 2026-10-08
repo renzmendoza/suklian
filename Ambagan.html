@@ -162,14 +162,14 @@ const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'
 const expr=s=>String(s||'').split('+').reduce((a,p)=>a+(parseFloat(p)||0),0);
 // languages: en = English, tg = Taglish, tl = Tagalog
 const L={
-en:{t0:'Split the bill',s0:'Enter the total bill first, then divide it by how many people are in the group.',pay:'💳 Paid',notPay:'Paid?',order:'Contribution',gave:'HAND GIVEN TO PAYER',add:'+ Add a member',n0:'Next: Bill & cash',
-t1:'Bill & your cash',s1:'How much did the payer give, and what cash do they hold?',paid:'AMOUNT GIVEN',shared:'SHARED / EXTRA AMOUNT (split equally, optional)',total:'Total contribution',cchg:'Collector change',lack:x=>`Payer is short by ${x} for the group collection.`,wt:"Payer's wallet",ws:'Enter the actual bills and coins available, including the cashier change. The plan uses these denominations.',wtot:'Wallet total: ',n1:'See the breakdown',n2:'Start over ↺',back:'Back',
+en:{t0:'Split the bill',s0:'Enter the total bill first, then divide it by how many people are in the group.',pay:'💳 Paid',notPay:'Paid?',order:'Ambag:',gave:'HAND GIVEN TO PAYER',add:'+ Add a member',n0:'Next: Bill & cash',
+t1:'Bill & your cash',s1:'How much did the payer pay to the cashier, and what cash do they hold?',paid:'AMOUNT PAID TO CASHIER',paidRequired:'Enter the amount paid to the cashier to continue.',shared:'SHARED / EXTRA AMOUNT (split equally, optional)',total:'Total contribution',cchg:'Collector change',lack:x=>`Payer is short by ${x} for the group collection.`,wt:"Payer's wallet",required:'Required',walletRequired:'Add the actual bills or coins in the payer’s wallet to continue.',ws:'Enter the actual bills and coins available, including the cashier change. The plan uses these denominations.',wtot:'Wallet total: ',n1:'See the breakdown',n2:'Start over ↺',back:'Back',
 chg:'Change',short:'Short',ok:'Settled ✓',give:'You give',ret:'They give back',net:'Their change',exact:x=>`Just give ${x} 🎉 exact, no change needed.`,col:x=>`Collect ${x} from them.`,exactNote:'Exact amount, no change.',nocash:x=>`Available bills cannot cover ${x}. Enter the actual bills and coins, or add cash from members.`,alt:'🔀 Try another setup',done:'Done',wait:'Waiting for the previous settlement.',all:'All settled! 🎉',left:x=>`Wallet after settlements: ${x}.`,none:'nothing',cb:'Collector change'},
-tg:{t0:'Hatiin ang bill',s0:'Ilagay muna ang kabuuang bill, pagkatapos hatiin ito base sa bilang ng tao sa grupo.',pay:'💳 Nagbayad',notPay:'Siya nagbayad?',order:'Contribution',gave:'INABOT SA PAYER',add:'+ Dagdag na member',n0:'Next: Bill & cash',
-t1:'Bill at cash mo',s1:'Magkano ang ibinigay ng payer, at anong cash ang hawak niya?',paid:'IBINIGAY NA HALAGA',shared:'SHARED / EXTRA AMOUNT (hati-hati, optional)',total:'Kabuuang contribution',cchg:'Sukli ng collector',lack:x=>`Kulang ng ${x} ang contribution para sa ambagan.`,wt:'Wallet ng payer',ws:'Ilagay ang aktwal na bills at coins, kasama ang sukli ng cashier. Gagamitin ito sa plano.',wtot:'Total sa wallet: ',n1:'Tingnan ang breakdown',n2:'Ulitin ↺',back:'Back',
+tg:{t0:'Hatiin ang bill',s0:'Ilagay muna ang kabuuang bill, pagkatapos hatiin ito base sa bilang ng tao sa grupo.',pay:'💳 Nagbayad',notPay:'Siya nagbayad?',order:'Ambag:',gave:'INABOT SA PAYER',add:'+ Dagdag na member',n0:'Next: Bill & cash',
+t1:'Bill at cash mo',s1:'Magkano ang ibinayad ng payer sa cashier, at anong cash ang hawak niya?',paid:'IBINAYAD SA CASHIER',paidRequired:'Ilagay ang halagang ibinayad sa cashier para makapagpatuloy.',shared:'SHARED / EXTRA AMOUNT (hati-hati, optional)',total:'Kabuuang ambag',cchg:'Sukli ng cashier',lack:x=>`Kulang ng ${x} ang ambag para sa grupo.`,wt:'Wallet ng payer',required:'Required',walletRequired:'Ilagay ang aktwal na bills o coins sa wallet ng payer para makapagpatuloy.',ws:'Ilagay ang aktwal na bills at coins, kasama ang sukli ng cashier. Gagamitin ito sa plano.',wtot:'Total sa wallet: ',n1:'Tingnan ang breakdown',n2:'Ulitin ↺',back:'Back',
 chg:'Sukli',short:'Kulang',ok:'Settled ✓',give:'Ibibigay mo',ret:'Ibabalik niya',net:'Sukli niya',exact:x=>`Ibigay lang ang ${x} 🎉 exact, walang sukli.`,col:x=>`Kunin sa kanya ang ${x}.`,exactNote:'Eksakto, walang sukli.',nocash:x=>`Hindi mabuo ang ${x} gamit ang bills na inilagay. Ilagay ang aktwal na bills at coins o idagdag ang cash mula sa mga member.`,alt:'🔀 Ibang setup',done:'Tapos na',wait:'Hintayin munang matapos ang naunang sukli.',all:'Settled lahat! 🎉',left:x=>`Natira sa wallet: ${x}.`,none:'wala',cb:'Sukli ng collector'},
-tl:{t0:'Hatiin ang bill',s0:'Ilagay muna ang kabuuang bill, pagkatapos hatiin ito base sa bilang ng tao sa grupo.',pay:'💳 Nagbayad',notPay:'Siya ba ang nagbayad?',order:'Contribution',gave:'INIABOT SA NAGBAYAD',add:'+ Magdagdag ng member',n0:'Susunod: Bill & pera',
-t1:'Bill at pera',s1:'Magkano ang ibinigay ng nagbayad, at anong pera ang hawak niya?',paid:'IBINIGAY NA HALAGA',shared:'SHARED / EXTRA AMOUNT (hati-hati, opsyonal)',total:'Kabuuang contribution',cchg:'Sukli ng collector',lack:x=>`Kulang ng ${x} ang contribution para sa ambagan.`,wt:'Pitaka ng nagbayad',ws:'Ilagay ang aktwal na bills at coins, kasama ang sukli ng cashier. Gagamitin ito sa plano.',wtot:'Kabuuan sa pitaka: ',n1:'Tingnan ang breakdown',n2:'Ulitin ↺',back:'Bumalik',
+tl:{t0:'Hatiin ang bill',s0:'Ilagay muna ang kabuuang bill, pagkatapos hatiin ito base sa bilang ng tao sa grupo.',pay:'💳 Nagbayad',notPay:'Siya ba ang nagbayad?',order:'Ambag:',gave:'INIABOT SA NAGBAYAD',add:'+ Magdagdag ng member',n0:'Susunod: Bill & pera',
+t1:'Bill at pera',s1:'Magkano ang ibinayad ng nagbayad sa cashier, at anong pera ang hawak niya?',paid:'HALAGANG IBINAYAD SA CASHIER',paidRequired:'Ilagay ang halagang ibinayad sa cashier para makapagpatuloy.',shared:'SHARED / EXTRA AMOUNT (hati-hati, opsyonal)',total:'Kabuuang ambag',cchg:'Sukli ng cashier',lack:x=>`Kulang ng ${x} ang ambag para sa grupo.`,wt:'Pitaka ng nagbayad',required:'Kailangan',walletRequired:'Ilagay ang aktwal na bills o coins sa pitaka para makapagpatuloy.',ws:'Ilagay ang aktwal na bills at coins, kasama ang sukli ng cashier. Gagamitin ito sa plano.',wtot:'Kabuuan sa pitaka: ',n1:'Tingnan ang breakdown',n2:'Ulitin ↺',back:'Bumalik',
 chg:'Sukli',short:'Kulang',ok:'Bayad na ✓',give:'Ibibigay mo',ret:'Ibabalik niya',net:'Sukli niya',exact:x=>`Ibigay lamang ang ${x} 🎉 eksakto, walang sukli.`,col:x=>`Kunin sa kanya ang ${x}.`,exactNote:'Eksakto, walang sukli.',nocash:x=>`Hindi mabuo ang ${x} gamit ang perang inilagay. Ilagay ang aktwal na bills at coins o idagdag ang cash mula sa mga member.`,alt:'🔀 Ibang setup',done:'Tapos na',wait:'Hintaying matapos ang naunang bayaran.',all:'Bayad na lahat! 🎉',left:x=>`Natira sa pitaka: ${x}.`,none:'wala',cb:'Sukli ng collector'}};
 const S={step:0,payer:0,paid:'',shared:'',billTotal:'',lang:'tg',theme:matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light',
  people:[{name:'',order:'',gave:''},{name:'',order:'',gave:''},{name:'',order:'',gave:''}],
@@ -230,11 +230,12 @@ function step0(){
 }
 function step1(){
   return `<h2>${t('t1')}</h2><p class="sub">${t('s1')}</p>
-  <div class="card"><div class="fld" style="margin-top:0"><label>${t('paid')}</label><div class="money"><b>₱</b><input inputmode="decimal" value="${esc(S.paid)}" oninput="S.paid=this.value;upd()"></div>${chipRow([100,200,500,1000],S.paid,'setPaid($V)')}</div>
+  <div class="card"><div class="fld" style="margin-top:0"><label for="paidAmount">${t('paid')}</label><div class="money"><b>₱</b><input id="paidAmount" inputmode="decimal" type="number" min="0.01" step="any" required value="${esc(S.paid)}" oninput="S.paid=this.value;$('paidError').textContent='';upd()"></div><p class="warn" id="paidError" role="alert" style="display:none;margin:8px 0 0"></p>${chipRow([100,200,500,1000],S.paid,'setPaid($V)')}</div>
   <div class="fld"><label>${t('shared')}</label><div class="money"><b>₱</b><input inputmode="decimal" value="${esc(S.shared)}" placeholder="0" oninput="S.shared=this.value;upd()"></div></div>
   <div class="sum" style="margin-top:12px"><div><small>${t('total')}</small><b id="tb"></b></div><div><small>${t('cchg')}</small><b id="cg"></b></div></div><div id="wn"></div></div>
-  <h2 style="font-size:17px">${t('wt')}</h2><p class="sub">${t('ws')}</p>
-  <div class="wal">${DEN.map(d=>`<div class="den" style="background:${COL[d]}"><b>${peso(d)}</b><div class="ct"><button onclick="wal(${d},-1)">−</button><span id="w${d}">${S.wallet[d]}</span><button onclick="wal(${d},1)">+</button></div></div>`).join('')}</div>
+  <h2 style="font-size:17px">${t('wt')} <small>(${t('required')})</small></h2><p class="sub">${t('ws')}</p>
+  <div class="wal" id="walletSection">${DEN.map(d=>`<div class="den" style="background:${COL[d]}"><b>${peso(d)}</b><div class="ct"><button onclick="wal(${d},-1)">−</button><span id="w${d}">${S.wallet[d]}</span><button id="wplus${d}" aria-label="Add ${peso(d)} bill or coin" onclick="wal(${d},1)">+</button></div></div>`).join('')}</div>
+  <p class="warn" id="walletError" role="alert" style="display:none;margin:8px 0 0"></p>
   <p class="note" id="wt" style="margin-top:10px"></p>`;
 }
 function cashBreakdown(amount){
@@ -427,7 +428,7 @@ function updateBillTotal(value){
   });
 }
 function setPaid(v){S.paid=String(v);draw()}
-function wal(d,v){S.wallet[d]=Math.max(0,Math.min(50,S.wallet[d]+v));$('w'+d).textContent=S.wallet[d];S.alt={};upd()}
+function wal(d,v){S.wallet[d]=Math.max(0,Math.min(50,S.wallet[d]+v));$('w'+d).textContent=S.wallet[d];if(v>0)$('walletError').style.display='none';S.alt={};upd()}
 function rmP(i){S.people.splice(i,1);if(S.payer>=S.people.length)S.payer=0;else if(i<S.payer)S.payer--;S.done={};S.alt={};draw()}
 function draw(){
   document.documentElement.dataset.theme=S.theme;
@@ -452,7 +453,7 @@ $('copyShareText').onclick=copyShareText;
 $('copyShareLink').onclick=copyShareLink;
 $('back').onclick=()=>{S.step--;draw();scrollTo(0,0)};
 $('copySummary').onclick=copySummary;
-$('next').onclick=()=>{if(S.step===2){S.step=0;S.done={};S.alt={}}else S.step++;draw();scrollTo(0,0)};
+$('next').onclick=()=>{if(S.step===1){const amount=Number(S.paid);if(!Number.isFinite(amount)||amount<=0){const input=$('paidAmount'),error=$('paidError');error.textContent=t('paidRequired');error.style.display='block';input.focus();return}if(!DEN.some(d=>S.wallet[d]>0)){const error=$('walletError');error.textContent=t('walletRequired');error.style.display='block';$('wplus'+DEN[0]).focus();return}}if(S.step===2){S.step=0;S.done={};S.donePlans={};S.alt={}}else S.step++;draw();scrollTo(0,0)};
 if(loadSharePayload()) draw(); else draw();
 </script>
 </body>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" type="image/png" href="./logo.png">
+<link rel="apple-touch-icon" href="./logo.png">
+<title>Suklian</title>
+<style>
+:root{--bg:#fbf6ec;--card:#fff;--ink:#22201c;--mute:#85806f;--line:#eee6d4;--acc:#ff6b4a;--acc2:#ffe3da;--ok:#12a36b;--okbg:#dff5ea;--bad:#d9480f;--badbg:#ffe8d6;--sh:0 4px 16px rgba(60,40,10,.07);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17150f;--card:#221f17;--ink:#f6f1e4;--mute:#a39c86;--line:#332f23;--acc:#ff8466;--acc2:#3b2119;--ok:#4cd9a0;--okbg:#143a2a;--bad:#ffa066;--badbg:#3b2514;--sh:none}}
+:root[data-theme="dark"]{--bg:#17150f;--card:#221f17;--ink:#f6f1e4;--mute:#a39c86;--line:#332f23;--acc:#ff8466;--acc2:#3b2119;--ok:#4cd9a0;--okbg:#143a2a;--bad:#ffa066;--badbg:#3b2514;--sh:none}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.4 "Poppins",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.app{max-width:520px;margin:0 auto;padding:18px 16px 130px}
+header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:12px}
+.brand{display:flex;align-items:center;gap:2px}
+.brand img{width:30px;height:30px;object-fit:contain;display:block;filter:none;border-radius:0;box-shadow:none;background:transparent;margin-top:1px}
+h1{font-size:24px;margin:0;font-weight:800;letter-spacing:-.02em;line-height:1;transform:translateY(-1px)}h1 span{color:var(--acc)}
+.header-actions{display:flex;align-items:center;gap:10px}
+.steps{display:flex;gap:6px}.steps i{width:26px;height:6px;border-radius:9px;background:var(--line)}.steps i.on{background:var(--acc)}
+h2{font-size:20px;margin:6px 0 2px;font-weight:700}.sub{color:var(--mute);margin:0 0 14px;font-size:14px}
+.card{background:var(--card);border-radius:20px;padding:14px;margin-bottom:12px;box-shadow:var(--sh);border:1px solid var(--line)}
+.pr{display:flex;gap:10px;align-items:center}
+.av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#fff;flex:none;font-size:18px}
+input{font:inherit;color:var(--ink)}
+.name{flex:1;min-width:0;border:0;background:transparent;font-weight:700;font-size:18px;padding:6px 0;border-bottom:2px dashed transparent}
+.name:focus{outline:none;border-bottom-color:var(--acc)}
+.rm{border:0;background:none;color:var(--mute);font-size:20px;padding:6px;cursor:pointer}
+.fld{margin-top:10px}.fld label{display:block;font-size:12px;color:var(--mute);margin-bottom:4px;font-weight:600}
+.money{display:flex;align-items:center;background:var(--bg);border-radius:14px;padding:0 12px;border:2px solid transparent}
+.money:focus-within{border-color:var(--acc)}
+.money b{color:var(--mute);margin-right:6px}.money input{flex:1;min-width:0;border:0;background:none;padding:12px 0;font-size:20px;font-weight:700}.money input:focus{outline:none}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.ch{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:6px 12px;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.ch.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.tog{margin-left:auto;font-size:12px}
+.add{width:100%;border:2px dashed var(--line);background:none;color:var(--mute);border-radius:18px;padding:14px;font:inherit;font-weight:600;cursor:pointer}
+.sum{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sum div{background:var(--bg);border-radius:14px;padding:10px 12px}.sum small{color:var(--mute);font-size:12px;font-weight:600}.sum b{display:block;font-size:20px}
+.warn{background:var(--badbg);color:var(--bad);padding:10px 12px;border-radius:12px;font-size:14px;margin-top:10px;font-weight:500}
+.wal{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.den{border-radius:16px;padding:10px;color:#1b1a14}
+.den b{font-size:20px;display:block}.den .ct{display:flex;align-items:center;justify-content:space-between;margin-top:6px}
+.den button{width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.7);font-size:20px;font-weight:700;color:#1b1a14;cursor:pointer}
+.den span{font-size:20px;font-weight:800}
+.hero{background:linear-gradient(135deg,var(--acc),#ff9a5a);color:#fff;border-radius:22px;padding:16px;margin-bottom:12px}
+.hero small{opacity:.9}.hero b{display:block;font-size:26px}
+.res{border-left:6px solid var(--ok)}.res.owe{border-left-color:var(--bad)}.res.dn{opacity:.5}
+.res .top{display:flex;align-items:center;gap:10px}.res .top b{font-size:17px;flex:1}
+.pill{border-radius:99px;padding:3px 10px;font-weight:700;font-size:14px;background:var(--okbg);color:var(--ok)}
+.owe .pill{background:var(--badbg);color:var(--bad)}
+.act{margin:10px 0 6px;font-size:16px}.act b{font-size:19px}
+.bills{display:flex;gap:6px;flex-wrap:wrap}.bills span{border-radius:8px;padding:3px 9px;font-weight:700;font-size:14px;color:#1b1a14}
+.chk{display:flex;align-items:center;gap:8px;margin-top:10px;font-weight:600;font-size:14px;color:var(--mute)}.chk input{width:22px;height:22px;accent-color:var(--ok)}
+.note{font-size:13px;color:var(--mute)}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--bg);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px))}
+.bar div{max-width:520px;margin:0 auto;display:flex;gap:10px}
+.btn{flex:1;border:0;border-radius:16px;padding:15px;font:inherit;font-weight:700;font-size:16px;cursor:pointer;background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.btn.p{background:var(--acc);color:#fff;border-color:var(--acc);flex:2}
+.btn.copy{background:var(--okbg);color:var(--ok);border-color:rgba(18,163,107,.2)}
+.btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.party{text-align:center;font-size:18px;font-weight:700;color:var(--ok);padding:10px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}
+.modal.show{display:flex}
+.modal-card{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:22px;max-width:440px;width:100%;padding:20px 18px;box-shadow:var(--sh)}
+.modal-card h3{margin:0 0 10px;font-size:22px}.modal-card ol{margin:0;padding-left:18px;display:grid;gap:8px;color:var(--ink)}
+.modal-card li{line-height:1.5}
+.modal-card p{margin:0 0 10px;color:var(--mute);font-size:14px}
+.modal-card input, .modal-card textarea{width:100%;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:12px;padding:10px 12px;font:inherit;resize:vertical}
+.modal-card textarea{min-height:120px}
+.modal-actions{display:flex;justify-content:flex-end;margin-top:16px;gap:8px}
+.info-btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;font:inherit;font-weight:700;font-size:13px;padding:8px 12px;cursor:pointer}
+.share-actions{display:flex;gap:8px;margin-top:10px} .share-actions .btn{flex:1}
+
+.tools{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:8px}
+.seg{display:flex;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px;flex:0 0 auto;max-width:100%;width:auto}
+.seg button{border:0;background:none;color:var(--mute);font:inherit;font-size:12px;font-weight:700;padding:6px 10px;border-radius:999px;cursor:pointer;min-width:0}
+.seg button.on{background:var(--acc);color:#fff;box-shadow:0 2px 8px rgba(255,107,74,.18)}
+.th{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;font:inherit;font-weight:700;font-size:13px;padding:8px 12px;cursor:pointer;min-width:74px}
+.flow{display:flex;align-items:stretch;gap:6px;margin:10px 0}
+.flow>div{flex:1;background:var(--bg);border-radius:14px;padding:8px 10px;text-align:center}
+.flow small{display:block;font-size:11px;color:var(--mute);font-weight:600}.flow b{font-size:20px}
+.flow>div.net{background:var(--okbg);color:var(--ok)}.flow>div.net small{color:var(--ok)}
+.flow i{align-self:center;color:var(--mute);font-style:normal;font-weight:700}
+.alt{border:1px dashed var(--line);background:none;color:var(--mute);border-radius:99px;font:inherit;font-size:13px;font-weight:600;padding:6px 12px;margin-top:8px;cursor:pointer}
+.row2{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="brand">
+      <img src="./logo.png" alt="Suklian logo">
+      <h1>uklian<span>.</span></h1>
+    </div>
+    <div class="header-actions">
+      <div class="steps" id="steps"></div>
+      <button class="th" id="theme"></button>
+    </div>
+  </header>
+  <div class="tools"><div class="seg" id="lang"></div><button class="info-btn" id="helpBtn">How to use</button></div>
+  <div id="view"></div>
+</div>
+<div class="modal" id="helpModal">
+  <div class="modal-card">
+    <h3>How to use Suklian</h3>
+    <ol>
+      <li>Add each member and type each contribution.</li>
+      <li>Choose who paid first and enter the total they paid to the cashier.</li>
+      <li>Enter the wallet cash available and let the app compute who gives or receives changes.</li>
+      <li>Use the final summary button to copy the breakdown for your group chat.</li>
+    </ol>
+    <div class="modal-actions"><button class="btn ghost" id="closeHelp">Close</button></div>
+  </div>
+</div>
+<div class="modal" id="shareModal">
+  <div class="modal-card">
+    <h3>Share summary</h3>
+    <p>Send the link or copy the text for your group chat.</p>
+    <input id="shareLink" readonly>
+    <div class="share-actions">
+      <button class="btn ghost" id="copyShareLink">Copy link</button>
+      <button class="btn copy" id="copyShareText">Copy text</button>
+    </div>
+    <textarea id="shareTextArea" readonly></textarea>
+    <div class="modal-actions"><button class="btn ghost" id="closeShare">Close</button></div>
+  </div>
+</div>
+<div class="bar"><div><button class="btn" id="back">Back</button><button class="btn copy" id="copySummary">Copy summary</button><button class="btn p" id="next">Next</button></div></div>
+
+<script>
+const DEN=[1000,500,200,100,50,20,10,5,1];
+const COL={1000:'#bfe3f5',500:'#ffe08a',200:'#c9efc2',100:'#d9c8f5',50:'#ffc2c2',20:'#ffd9a8',10:'#ffe9a0',5:'#e5d3b8',1:'#e5e5e5'};
+const AVC=['#ff6b4a','#12a36b','#4c7cf0','#e0569c','#f0a020','#8a5cf0'];
+const peso=n=>'₱'+Number(n).toLocaleString('en-PH',{maximumFractionDigits:2});
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const expr=s=>String(s||'').split('+').reduce((a,p)=>a+(parseFloat(p)||0),0);
+// languages: en = English, tg = Taglish, tl = Tagalog
+const L={
+en:{t0:'Who needs suklian?',s0:"Enter each person’s contribution and the cash they handed to the payer.",pay:'💳 Paid',notPay:'Paid?',order:'Contribution',gave:'HAND GIVEN TO PAYER',add:'+ Add a member',n0:'Next: Contribution & cash',
+t1:'Contribution & your cash',s1:'How much did the payer give, and what cash do they hold?',paid:'AMOUNT GIVEN',shared:'SHARED / EXTRA AMOUNT (split equally, optional)',total:'Total contribution',cchg:'Collector change',lack:x=>`Payer is short by ${x} for the group collection.`,wt:"Payer's wallet",ws:'Include the collector change and cash from members. The plan uses this.',wtot:'Wallet total: ',n1:'See the breakdown',n2:'Start over ↺',back:'Back',
+chg:'Change',short:'Short',ok:'Settled ✓',give:'You give',ret:'They give back',net:'Their change',exact:x=>`Just give ${x} 🎉 exact, no change needed.`,col:x=>`Collect ${x} from them.`,exactNote:'Exact amount, no change.',nocash:x=>`Not enough cash. Send ${x} by GCash or add cash to the wallet.`,alt:'🔀 Try another setup',done:'Done',all:'All settled! 🎉',left:x=>`Left in wallet: ${x}. Add whatever your members hand back.`,none:'nothing',cb:'Collector change'},
+tg:{t0:'Sino ang kailangan suklian?',s0:'Ilagay ang contribution ng bawat isa at ang cash na inabot nila sa nagbayad.',pay:'💳 Nagbayad',notPay:'Siya nagbayad?',order:'Contribution',gave:'INABOT SA PAYER',add:'+ Dagdag na member',n0:'Next: Contribution & cash',
+t1:'Contribution at cash mo',s1:'Magkano ang ibinigay ng payer, at anong cash ang hawak niya?',paid:'IBINIGAY NA HALAGA',shared:'SHARED / EXTRA AMOUNT (hati-hati, optional)',total:'Kabuuang contribution',cchg:'Sukli ng collector',lack:x=>`Kulang ng ${x} ang contribution para sa ambagan.`,wt:'Wallet ng payer',ws:'Isama ang sukli ng collector at cash mula sa mga member. Dito huhugot ang plano.',wtot:'Total sa wallet: ',n1:'Tingnan ang breakdown',n2:'Ulitin ↺',back:'Back',
+chg:'Sukli',short:'Kulang',ok:'Settled ✓',give:'Ibibigay mo',ret:'Ibabalik niya',net:'Sukli niya',exact:x=>`Ibigay lang ang ${x} 🎉 exact, walang sukli.`,col:x=>`Kunin sa kanya ang ${x}.`,exactNote:'Eksakto, walang sukli.',nocash:x=>`Kulang ang cash mo. I-GCash na lang ang ${x} o dagdagan ang wallet.`,alt:'🔀 Ibang setup',done:'Tapos na',all:'Settled lahat! 🎉',left:x=>`Matitira sa wallet: ${x}. Idagdag ang ibinalik ng mga member.`,none:'wala',cb:'Sukli ng collector'},
+tl:{t0:'Sino ang kailangan suklian?',s0:'Ilagay ang contribution ng bawat isa at ang perang iniabot nila sa nagbayad.',pay:'💳 Nagbayad',notPay:'Siya ba ang nagbayad?',order:'Contribution',gave:'INIABOT SA NAGBAYAD',add:'+ Magdagdag ng member',n0:'Susunod: Contribution & pera',
+t1:'Contribution at pera',s1:'Magkano ang ibinigay ng nagbayad, at anong pera ang hawak niya?',paid:'IBINIGAY NA HALAGA',shared:'SHARED / EXTRA AMOUNT (hati-hati, opsyonal)',total:'Kabuuang contribution',cchg:'Sukli ng collector',lack:x=>`Kulang ng ${x} ang contribution para sa ambagan.`,wt:'Pitaka ng nagbayad',ws:'Isama ang sukli ng collector at perang galing sa mga member. Dito huhugot ang plano.',wtot:'Kabuuan sa pitaka: ',n1:'Tingnan ang breakdown',n2:'Ulitin ↺',back:'Bumalik',
+chg:'Sukli',short:'Kulang',ok:'Bayad na ✓',give:'Ibibigay mo',ret:'Ibabalik niya',net:'Sukli niya',exact:x=>`Ibigay lamang ang ${x} 🎉 eksakto, walang sukli.`,col:x=>`Kunin sa kanya ang ${x}.`,exactNote:'Eksakto, walang sukli.',nocash:x=>`Kulang ang pera mo. I-GCash ang ${x} o dagdagan ang pitaka.`,alt:'🔀 Ibang setup',done:'Tapos na',all:'Bayad na lahat! 🎉',left:x=>`Matitira sa pitaka: ${x}. Idagdag ang ibinalik ng mga member.`,none:'wala',cb:'Sukli ng collector'}};
+const S={step:0,payer:0,paid:'',shared:'',lang:'tg',theme:matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light',
+ people:[{name:'',order:'',gave:''},{name:'',order:'',gave:''},{name:'',order:'',gave:''}],
+ wallet:{1000:0,500:0,200:0,100:1,50:1,20:0,10:0,5:0,1:0},done:{},alt:{}};
+
+function generateScenario(){
+  S.step=0; S.payer=0; S.paid='500'; S.shared='';
+  S.people=[{name:'Me',order:'161',gave:''},{name:'Shai',order:'161',gave:'200'},{name:'Kurt',order:'161',gave:'200'}];
+  S.done={}; S.alt={};
+  draw();
+}
+const $=id=>document.getElementById(id);
+const t=k=>L[S.lang][k];
+
+function figures(){
+  const n=S.people.length,sh=(parseFloat(S.shared)||0)/n;
+  const share=S.people.map(p=>expr(p.order)+sh),total=share.reduce((a,b)=>a+b,0),paid=parseFloat(S.paid)||0;
+  return{total,paid,chg:paid-total,D:S.people.map((p,i)=>i===S.payer?0:Math.round((parseFloat(p.gave)||0)-share[i]))};
+}
+// smallest set of pieces that sums to >= minG (exact first, then least overpay)
+function pick(D,counts,minG){
+  const pcs=[];DEN.forEach(d=>{for(let k=0;k<Math.min(counts[d],20);k++)pcs.push(d)});
+  const M=D+1000,INF=1e9,dp=new Array(M+1).fill(INF);dp[0]=0;const take=[];
+  pcs.forEach(v=>{const r=new Uint8Array(M+1);for(let s=M;s>=v;s--)if(dp[s-v]+1<dp[s]){dp[s]=dp[s-v]+1;r[s]=1}take.push(r)});
+  let s=-1;for(let q=Math.max(D,minG||0);q<=M;q++)if(dp[q]<INF){s=q;break}
+  if(s<0)return null;const used={},G=s;
+  for(let k=pcs.length-1;k>=0&&s>0;k--)if(take[k][s]){used[pcs[k]]=(used[pcs[k]]||0)+1;s-=pcs[k]}
+  return{G,used};
+}
+function options(D,counts){const o=[];let m=D;for(let k=0;k<6;k++){const r=pick(D,counts,m);if(!r)break;o.push(r);m=r.G+1}return o}
+const bills=u=>'<div class="bills">'+Object.keys(u).sort((a,b)=>b-a).map(d=>`<span style="background:${COL[d]}">${u[d]} × ${peso(d)}</span>`).join('')+'</div>';
+const chipRow=(vals,cur,fn)=>'<div class="chips">'+vals.map(v=>`<button class="ch ${String(cur)===String(v)?'on':''}" onclick="${fn}">${peso(v)}</button>`.replace('$V',v)).join('')+'</div>';
+
+function step0(){
+  return `<h2>${t('t0')}</h2><p class="sub">${t('s0')}</p>`+S.people.map((p,i)=>`<div class="card"><div class="pr"><div class="av" style="background:${AVC[i%6]}">${esc((p.name||'?')[0].toUpperCase())}</div>
+    <input class="name" value="${esc(p.name)}" oninput="S.people[${i}].name=this.value">
+    <button class="ch tog ${i===S.payer?'on':''}" onclick="S.payer=${i};S.alt={};draw()">${i===S.payer?t('pay'):t('notPay')}</button>
+    ${S.people.length>2?`<button class="rm" onclick="rmP(${i})">✕</button>`:''}</div>
+    <div class="fld"><label>${t('order')}</label><div class="money"><b>₱</b><input inputmode="decimal" value="${esc(p.order)}" placeholder="0" oninput="S.people[${i}].order=this.value"></div></div>
+    ${i===S.payer?'':`<div class="fld"><label>${t('gave')}</label><div class="money"><b>₱</b><input inputmode="decimal" value="${esc(p.gave)}" placeholder="0" oninput="S.people[${i}].gave=this.value"></div>${chipRow([50,100,200,500,1000],p.gave,`setG(${i},$V)`)}</div>`}</div>`).join('')+
+  `<button class="add" onclick="S.people.push({name:'',order:'',gave:''});draw()">${t('add')}</button><button class="add" style="margin-top:8px" onclick="generateScenario()">Generate a scenario</button>`;
+}
+function step1(){
+  return `<h2>${t('t1')}</h2><p class="sub">${t('s1')}</p>
+  <div class="card"><div class="fld" style="margin-top:0"><label>${t('paid')}</label><div class="money"><b>₱</b><input inputmode="decimal" value="${esc(S.paid)}" oninput="S.paid=this.value;upd()"></div>${chipRow([100,200,500,1000],S.paid,'setPaid($V)')}</div>
+  <div class="fld"><label>${t('shared')}</label><div class="money"><b>₱</b><input inputmode="decimal" value="${esc(S.shared)}" placeholder="0" oninput="S.shared=this.value;upd()"></div></div>
+  <div class="sum" style="margin-top:12px"><div><small>${t('total')}</small><b id="tb"></b></div><div><small>${t('cchg')}</small><b id="cg"></b></div></div><div id="wn"></div></div>
+  <h2 style="font-size:17px">${t('wt')}</h2><p class="sub">${t('ws')}</p>
+  <div class="wal">${DEN.map(d=>`<div class="den" style="background:${COL[d]}"><b>${peso(d)}</b><div class="ct"><button onclick="wal(${d},-1)">−</button><span id="w${d}">${S.wallet[d]}</span><button onclick="wal(${d},1)">+</button></div></div>`).join('')}</div>
+  <p class="note" id="wt" style="margin-top:10px"></p>`;
+}
+function step2(){
+  const c=figures(),left={...S.wallet},plan={},cnt={};
+  S.people.map((p,i)=>[c.D[i],i]).filter(x=>x[0]>0).sort((a,b)=>b[0]-a[0]).forEach(([d,i])=>{
+    const o=options(d,left);cnt[i]=o.length;if(!o.length)return;
+    const r=o[(S.alt[i]||0)%o.length];plan[i]=r;DEN.forEach(k=>left[k]-=(r.used[k]||0))});
+  let cards='',open=0;
+  S.people.forEach((p,i)=>{
+    if(i===S.payer)return;const d=c.D[i],key=i+'|'+d;let pill,body,cls='card res';
+    if(d>0){const r=plan[i];pill=`${t('chg')} ${peso(d)}`;
+      if(!r)body=`<div class="warn">${t('nocash')(peso(d))}</div>`;
+      else if(r.G===d)body=`<div class="act">${t('exact')(`<b>${peso(d)}</b>`)}</div>${bills(r.used)}`+(cnt[i]>1?`<button class="alt" onclick="S.alt[${i}]=(S.alt[${i}]||0)+1;draw()">${t('alt')}</button>`:'');
+      else body=`<div class="flow"><div><small>${t('give')}</small><b>${peso(r.G)}</b></div><i>→</i><div><small>${t('ret')}</small><b>${peso(r.G-d)}</b></div><i>=</i><div class="net"><small>${t('net')}</small><b>${peso(d)}</b></div></div>${bills(r.used)}`+(cnt[i]>1?`<button class="alt" onclick="S.alt[${i}]=(S.alt[${i}]||0)+1;draw()">${t('alt')}</button>`:'')}
+    else if(d<0){cls+=' owe';pill=`${t('short')} ${peso(-d)}`;body=`<div class="act">${t('col')(`<b>${peso(-d)}</b>`)}</div>`}
+    else{pill=t('ok');body=`<div class="note" style="margin-top:8px">${t('exactNote')}</div>`}
+    if(d!==0&&!S.done[key])open++;if(S.done[key])cls+=' dn';
+    cards+=`<div class="${cls}"><div class="top"><div class="av" style="background:${AVC[i%6]};width:36px;height:36px;font-size:15px">${esc((p.name||'?')[0].toUpperCase())}</div><b>${esc(p.name||'Friend')}</b><span class="pill">${pill}</span></div>${body}${d!==0?`<label class="chk"><input type="checkbox" ${S.done[key]?'checked':''} onchange="S.done['${key}']=this.checked;draw()"> ${t('done')}</label>`:''}</div>`});
+  const rest=DEN.filter(k=>left[k]>0).map(k=>`${left[k]}×${peso(k)}`).join(', ')||t('none');
+  return `<div class="hero"><small>${t('total')} ${peso(c.total)}</small><b>${t('cb')} ${peso(c.chg)}</b></div>${c.chg<0?`<div class="warn" style="margin:0 0 12px">${t('lack')(peso(-c.chg))}</div>`:''}`+cards+(open===0?`<div class="party">${t('all')}</div>`:'')+`<p class="note">${t('left')(rest)}</p>`;
+}
+function buildSummary(){
+  const c=figures();
+  const payerName = S.people[S.payer]?.name || 'Payer';
+  const payerDisplay = payerName === 'Ako' ? 'Me' : payerName;
+  const totalBill = c.total;
+  const paid = parseFloat(S.paid) || 0;
+  const change = paid - totalBill;
+  const lines=[
+    `Total Bill: ${peso(totalBill)}`,
+    `Main Payer: ${payerDisplay} (Payer)`,
+    `Bill Paid to Cashier: ${peso(paid)} (Change Received: ${peso(change)})`,
+    '',
+    'FRIEND BREAKDOWN & SWAPS:'
+  ];
+
+  S.people.forEach((p,i)=>{
+    if(i===S.payer) return;
+    const name = p.name || `Member ${i+1}`;
+    const share = expr(p.order) + ((parseFloat(S.shared)||0) / S.people.length);
+    const handed = parseFloat(p.gave) || 0;
+    const diff = c.D[i];
+    const target = S.people[(i + 1) % S.people.length]?.name || payerDisplay;
+    const giveAmount = Math.max(10, Math.min(Math.round(handed / 2), Math.max(10, Math.round(Math.abs(diff) + 20))));
+    const refundAmount = Math.max(0, Math.round(Math.abs(diff)));
+    lines.push(`• ${name}: Meal ${peso(share)} | Handed ${peso(handed)}`);
+    if(diff > 0){
+      lines.push(`  ↳ Gave ${peso(giveAmount)} to ${target} → ${name} returned ${peso(refundAmount)}`);
+      lines.push('  ✓ FULLY SETTLED');
+    }else if(diff < 0){
+      lines.push(`  ↳ Gave ${peso(Math.abs(diff))} to ${payerDisplay} → ${name} still owes ${peso(Math.abs(diff))}`);
+      lines.push('  ⚠ NEEDS PAYMENT');
+    }else{
+      lines.push('  ✓ FULLY SETTLED');
+    }
+  });
+
+  const netOut = Math.max(0, paid - totalBill);
+  lines.push('');
+  lines.push(`${payerDisplay} (Payer)'s Net Out-of-Pocket: ${peso(netOut)}`);
+  return lines.join('\n');
+}
+function makeSharePayload(){
+  return JSON.stringify({
+    payer:S.payer,
+    paid:S.paid,
+    shared:S.shared,
+    lang:S.lang,
+    theme:S.theme,
+    people:S.people.map(p=>({name:p.name,order:p.order,gave:p.gave})),
+    wallet:S.wallet
+  });
+}
+function getShareLink(){
+  const payload = encodeURIComponent(btoa(unescape(encodeURIComponent(makeSharePayload()))));
+  return `${location.origin}${location.pathname}#share=${payload}`;
+}
+function loadSharePayload(){
+  const hash = location.hash.replace(/^#/, '');
+  if(!hash.startsWith('share=')) return false;
+  try {
+    const raw = decodeURIComponent(escape(atob(decodeURIComponent(hash.slice(6)))));
+    const data = JSON.parse(raw);
+    if(data && Array.isArray(data.people)){
+      S.payer = Number(data.payer || 0);
+      S.paid = String(data.paid || '');
+      S.shared = String(data.shared || '');
+      S.lang = data.lang || S.lang;
+      S.theme = data.theme || S.theme;
+      S.people = data.people.map(p=>({name:p.name||'',order:String(p.order||''),gave:String(p.gave||'')}));
+      S.wallet = {...S.wallet, ...data.wallet};
+      return true;
+    }
+  } catch (err) { return false; }
+  return false;
+}
+async function copyText(text){
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+    } else {
+      const area = document.createElement('textarea');
+      area.value = text;
+      area.style.position = 'fixed';
+      area.style.opacity = '0';
+      document.body.appendChild(area);
+      area.focus();
+      area.select();
+      document.execCommand('copy');
+      document.body.removeChild(area);
+    }
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+function openShareModal(){
+  const text = buildSummary();
+  $('shareTextArea').value = text;
+  $('shareLink').value = getShareLink();
+  $('shareModal').classList.add('show');
+}
+async function copySummary(){
+  const text = buildSummary();
+  openShareModal();
+  const copied = await copyText(text);
+  if (copied) {
+    $('shareTextArea').value = text;
+    return;
+  }
+  alert('Copy failed. Use the copy buttons in the share popup instead.');
+}
+function copyShareText(){
+  const text = $('shareTextArea').value;
+  copyText(text).then(ok=>{
+    if (ok) alert('Summary text copied to clipboard.');
+    else alert('Copy failed. Please select the text and copy it manually.');
+  });
+}
+function copyShareLink(){
+  const text = $('shareLink').value;
+  copyText(text).then(ok=>{
+    if (ok) alert('Share link copied to clipboard.');
+    else alert('Copy failed. Please select the link and copy it manually.');
+  });
+}
+function upd(){const c=figures();if($('tb')){$('tb').textContent=peso(c.total);$('cg').textContent=peso(c.chg);$('wn').innerHTML=c.chg<0?`<div class="warn">${t('lack')(peso(-c.chg))}</div>`:'';
+  $('wt').textContent=t('wtot')+peso(DEN.reduce((a,d)=>a+d*S.wallet[d],0))}}
+function setG(i,v){S.people[i].gave=String(v);draw()}
+function setPaid(v){S.paid=String(v);draw()}
+function wal(d,v){S.wallet[d]=Math.max(0,Math.min(50,S.wallet[d]+v));$('w'+d).textContent=S.wallet[d];S.alt={};upd()}
+function rmP(i){S.people.splice(i,1);if(S.payer>=S.people.length)S.payer=0;else if(i<S.payer)S.payer--;S.done={};S.alt={};draw()}
+function draw(){
+  document.documentElement.dataset.theme=S.theme;
+  $('theme').textContent=S.theme==='dark'?'☀️ Light':'🌙 Dark';
+  $('lang').innerHTML=[['en','English'],['tg','Taglish'],['tl','Tagalog']].map(([k,n])=>`<button class="${S.lang===k?'on':''}" onclick="S.lang='${k}';draw()">${n}</button>`).join('');
+  $('view').innerHTML=[step0,step1,step2][S.step]();
+  $('steps').innerHTML=[0,1,2].map(i=>`<i class="${i<=S.step?'on':''}"></i>`).join('');
+  $('back').style.display=S.step?'':'none';$('back').textContent=t('back');
+  $('copySummary').style.display=S.step===2?'':'none';
+  $('next').textContent=[t('n0'),t('n1'),t('n2')][S.step];upd();
+}
+$('theme').onclick=()=>{S.theme=S.theme==='dark'?'light':'dark';draw()};
+$('helpBtn').onclick=()=>{$('helpModal').classList.add('show')};
+$('closeHelp').onclick=()=>{$('helpModal').classList.remove('show')};
+$('helpModal').onclick=(e)=>{if(e.target.id==='helpModal')$('helpModal').classList.remove('show')};
+$('closeShare').onclick=()=>{$('shareModal').classList.remove('show')};
+$('shareModal').onclick=(e)=>{if(e.target.id==='shareModal')$('shareModal').classList.remove('show')};
+$('copyShareText').onclick=copyShareText;
+$('copyShareLink').onclick=copyShareLink;
+$('back').onclick=()=>{S.step--;draw();scrollTo(0,0)};
+$('copySummary').onclick=copySummary;
+$('next').onclick=()=>{if(S.step===2){S.step=0;S.done={};S.alt={}}else S.step++;draw();scrollTo(0,0)};
+if(loadSharePayload()) draw(); else draw();
+</script>
+</body>
+</html>
